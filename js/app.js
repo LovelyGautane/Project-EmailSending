@@ -18,13 +18,13 @@ eventListeners();
     }
 
     // Validate the forms
-    email.addEventListener('blur', validateField);
-    subject.addEventListener('blur', validateField);
-    message.addEventListener('blur', validateField);
+        email.addEventListener('blur', validateField);
+        subject.addEventListener('blur', validateField);
+        message.addEventListener('blur', validateField);
 
     // Send Email and Reset Button
-
-    resetBtn.addEventListener('click', resetForm);
+        sendEmailForm.addEventListener('submit', sendEmail);
+        resetBtn.addEventListener('click', resetForm);
 
 
 
@@ -36,18 +36,34 @@ eventListeners();
         sendBtn.disabled = true;
     }
 
+
+    function sendEmail(e) {
+    e.preventDefault();
+
+        // show the spinner
+        const spinner = document.querySelector('#spinner');
+        spinner.style.display = 'block';
+    }
+
+    // hide spinner then show the send email image
+        setTimeout(function() {
+            // hide the spinner
+            spinner.style.display = 'none';
+        }, 3000 );
+    
+
     // Validate the form fields
-        function validateField() {
-             let errors;
+    function validateField() {
+    let errors;
 
 
     // Validate the length of the field
-         validateLength(this);
+    validateLength(this);
 
     // Validate email
-        if(this.type === 'email') {
-              validateEmail(this);
-        }
+    if(this.type === 'email') {
+        validateEmail(this);
+    }
 
     // Both will return errors, then check if there're any errors
     errors = document.querySelectorAll('.error');
@@ -63,29 +79,29 @@ eventListeners();
     }
 
     // Validate the length of the fields
-        function validateLength(field) {
-            if(field.value.length > 0 ) {
-                field.style.borderBottomColor = 'green';
-                field.classList.remove('error');
-            } else {
-                field.style.borderBottomColor = 'red';
-                field.classList.add('error');
-            }
-         }
+    function validateLength(field) {
+        if(field.value.length > 0 ) {
+            field.style.borderBottomColor = 'green';
+            field.classList.remove('error');
+        } else {
+            field.style.borderBottomColor = 'red';
+            field.classList.add('error');
+        }
+    }
 
     // Validate email (checks for @ in the value)
         function validateEmail(field) {
-            let emailText = field.value;
-           
-            // check if the emailText contains the @ sign
-            if(emailText.indexOf('@') !== -1) {
-                field.style.borderBottomColor = 'green';
-                field.classList.remove('error');
-            } else {
-                field.style.borderBottomColor = 'red';
-                field.classList.add('error');
-            }
+        let emailText = field.value;
+
+        // check if the emailText contains the @ sign
+        if(emailText.indexOf('@') !== -1) {
+            field.style.borderBottomColor = 'green';
+            field.classList.remove('error');
+        } else {
+            field.style.borderBottomColor = 'red';
+            field.classList.add('error');
         }
+    }
 
 // Reset The Form
 function resetForm() {
